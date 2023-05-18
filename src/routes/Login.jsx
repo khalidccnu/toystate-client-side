@@ -5,7 +5,8 @@ import { AuthContext } from "../providers/AuthProvider.jsx";
 import bnLogin from "../assets/bn-login.png";
 
 const Login = () => {
-  const { loading, setLoading, signInWithEP } = useContext(AuthContext);
+  const { loading, setLoading, signInWithEP, signInWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
@@ -25,6 +26,12 @@ const Login = () => {
     const { email, password } = e.target;
 
     signInWithEP(email.value, password.value)
+      .then((_) => navigate("/dashboard"))
+      .catch((_) => setLoading(false));
+  };
+
+  const handleLoginWithGoogle = (_) => {
+    signInWithGoogle()
       .then((_) => navigate("/dashboard"))
       .catch((_) => setLoading(false));
   };
@@ -72,7 +79,10 @@ const Login = () => {
               </Link>
             </div>
             <div className="divider">or</div>
-            <div className="flex justify-center items-center p-2 border hover:text-[#35bef0] cursor-pointer space-x-2 transition-[color] duration-500">
+            <div
+              className="flex justify-center items-center p-2 border hover:text-[#35bef0] cursor-pointer space-x-2 transition-[color] duration-500"
+              onClick={handleLoginWithGoogle}
+            >
               <FaGoogle className="text-xl" />
               <span>Continue with Google</span>
             </div>
