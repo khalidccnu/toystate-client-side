@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 import bnLogin from "../assets/bn-login.png";
 
 const Login = () => {
+  const { loading, setLoading, signInWithEP } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -20,6 +23,10 @@ const Login = () => {
   const handleLoginWithEP = (e) => {
     e.preventDefault();
     const { email, password } = e.target;
+
+    signInWithEP(email.value, password.value)
+      .then((_) => navigate("/dashboard"))
+      .catch((_) => setLoading(false));
   };
 
   return (
@@ -50,7 +57,13 @@ const Login = () => {
               type="submit"
               className="btn btn-sm bg-[#35bef0] border-none rounded normal-case w-full"
             >
-              Login
+              <span>Login</span>
+              {loading ? (
+                <span
+                  className="inline-block h-4 w-4 border-2 border-current border-r-transparent rounded-full ml-2 animate-spin"
+                  role="status"
+                ></span>
+              ) : null}
             </button>
             <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-2">
               <span>New to ToyState?</span>

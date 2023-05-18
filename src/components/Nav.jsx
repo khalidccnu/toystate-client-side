@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { FaBars, FaTimesCircle } from "react-icons/fa";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FaBars, FaTimesCircle, FaUser } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Nav = () => {
+  const { loading, userInfo, logOut } = useContext(AuthContext);
   const [hbMenu, setHbMenu] = useState(true);
   const collapseHbMenu = useRef();
 
@@ -89,19 +91,66 @@ const Nav = () => {
                     Blogs
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/login"
-                    className={({ isActive }) =>
-                      "nav-link block hover:text-purple-600" +
-                      (isActive ? " text-pink-600" : "")
-                    }
-                  >
-                    Login
-                  </NavLink>
-                </li>
+                {!loading && !userInfo ? (
+                  <li>
+                    <NavLink
+                      to="/login"
+                      className={({ isActive }) =>
+                        "nav-link block hover:text-purple-600" +
+                        (isActive ? " text-pink-600" : "")
+                      }
+                    >
+                      Login
+                    </NavLink>
+                  </li>
+                ) : null}
               </ul>
             </div>
+            {!loading && userInfo ? (
+              <div className="dropdown dropdown-end ml-3">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 border-2 border-dotted rounded-full">
+                    {userInfo.photoURL ? (
+                      <img src={userInfo.photoURL} alt="" />
+                    ) : (
+                      <span className="inline-flex items-center h-full text-xl">
+                        <FaUser />
+                      </span>
+                    )}
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu menu-compact mt-3 p-2 w-52 bg-base-200/50 backdrop-blur rounded-box shadow"
+                >
+                  <li>
+                    <NavLink
+                      to="/dashboard"
+                      className={({ isActive }) =>
+                        isActive ? "text-pink-600" : ""
+                      }
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/settings"
+                      className={({ isActive }) =>
+                        isActive ? "text-pink-600" : ""
+                      }
+                    >
+                      Settings
+                    </NavLink>
+                  </li>
+                  <li>
+                    <Link to="/login" onClick={logOut}>
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

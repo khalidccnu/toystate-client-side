@@ -11,7 +11,11 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Root />,
+      element: (
+        <AuthProvider>
+          <Root />
+        </AuthProvider>
+      ),
       children: [
         {
           path: "/",
