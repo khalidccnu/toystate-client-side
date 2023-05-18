@@ -4,6 +4,7 @@ import HomeLoader from "./loaders/HomeLoader.js";
 import Root from "./routes/Root.jsx";
 import Home from "./routes/Home.jsx";
 import Login from "./routes/Login.jsx";
+import Signup from "./routes/Signup.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ const App = () => {
           element: <Login />,
         },
       ],
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
     },
   ]);
 
