@@ -89,6 +89,17 @@ const Nav = () => {
                     Blogs
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) =>
+                      "nav-link block hover:text-purple-600" +
+                      (isActive ? " text-pink-600" : "")
+                    }
+                  >
+                    Login
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>
