@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLink, FaUser, FaUserSecret } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 import ptSignup from "../assets/pt-signup.png";
 
 const Signup = () => {
+  const { createUserWithEP } = useContext(AuthContext);
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -11,6 +13,7 @@ const Signup = () => {
     purl: "",
   });
   const navigate = useNavigate();
+  const [success, setSuccess] = useState("");
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -23,6 +26,14 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
     const { name, email, password, purl } = e.target;
+
+    createUserWithEP(name.value, email.value, password.value, purl.value)
+      .then((_) =>
+        setSuccess(
+          "Your account has been created successfully! You are being redirected, please wait..."
+        )
+      )
+      .then((_) => setTimeout((_) => navigate("/dashboard"), 3000));
   };
 
   return (
@@ -43,6 +54,11 @@ const Signup = () => {
             className="form-control basis-80 space-y-4"
             onSubmit={handleSignup}
           >
+            {success ? (
+              <span className="text-xs font-medium text-neutral md:text-[#35bef0]">
+                {success}
+              </span>
+            ) : null}
             <label className="input-group">
               <span className="border border-r-0 border-gray-300">
                 <FaUser />

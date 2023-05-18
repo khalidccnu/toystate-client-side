@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLoader from "./loaders/HomeLoader.js";
+import AuthProvider from "./providers/AuthProvider.jsx";
 import Root from "./routes/Root.jsx";
 import Home from "./routes/Home.jsx";
 import Login from "./routes/Login.jsx";
@@ -25,7 +26,11 @@ const App = () => {
     },
     {
       path: "/signup",
-      element: <Signup />,
+      element: (
+        <AuthProvider>
+          <Signup />
+        </AuthProvider>
+      ),
     },
   ]);
 
