@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimesCircle, FaUser } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Nav = () => {
   const { loading, userInfo, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [hbMenu, setHbMenu] = useState(true);
   const collapseHbMenu = useRef();
 
@@ -20,6 +21,11 @@ const Nav = () => {
         : null
       : null;
   };
+
+  const handleLogout = (_) =>
+    logOut()
+      .then((_) => sessionStorage.removeItem("_vu"))
+      .then((_) => navigate("/login"));
 
   useEffect(() => {
     addEventListener("resize", handleResize);
@@ -144,9 +150,7 @@ const Nav = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <Link to="/login" onClick={logOut}>
-                      Logout
-                    </Link>
+                    <span onClick={handleLogout}>Logout</span>
                   </li>
                 </ul>
               </div>

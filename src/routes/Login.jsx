@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import useTitle from "../hooks/useTitle.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
@@ -10,11 +10,13 @@ const Login = () => {
   const { loading, setLoading, signInWithEP, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
   const [status, setStatus] = useState("");
+  const fromURL = location.state?.fromURL.pathname;
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -34,7 +36,7 @@ const Login = () => {
     }
 
     signInWithEP(email.value, password.value)
-      .then((_) => navigate("/dashboard"))
+      .then((_) => navigate(fromURL || "/dashboard"))
       .catch((err) => {
         setLoading(false);
 
@@ -47,9 +49,16 @@ const Login = () => {
 
   const handleLoginWithGoogle = (_) => {
     signInWithGoogle()
-      .then((_) => navigate("/dashboard"))
+      .then((_) => navigate(fromURL || "/dashboard"))
       .catch((_) => setLoading(false));
   };
+
+  useEffect((_) => {
+    if (fromURL)
+      setStatus(
+        "Only registered user can access this page. Please, login first!"
+      );
+  }, []);
 
   return (
     <section className="py-10">

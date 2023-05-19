@@ -2,10 +2,13 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLoader from "./loaders/HomeLoader.js";
 import AuthProvider from "./providers/AuthProvider.jsx";
+import LogOffRoute from "./components/LogOffRoute.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
 import Login from "./routes/Login.jsx";
+import Dashboard from "./routes/Dashboard.jsx";
 import Signup from "./routes/Signup.jsx";
 
 const App = () => {
@@ -26,16 +29,30 @@ const App = () => {
         },
         {
           path: "/login",
-          element: <Login />,
+          element: (
+            <LogOffRoute>
+              <Login />
+            </LogOffRoute>
+          ),
+        },
+        {
+          path: "/dashboard",
+          element: (
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          ),
         },
       ],
     },
     {
       path: "/signup",
       element: (
-        <AuthProvider>
-          <Signup />
-        </AuthProvider>
+        <LogOffRoute>
+          <AuthProvider>
+            <Signup />
+          </AuthProvider>
+        </LogOffRoute>
       ),
     },
   ]);
