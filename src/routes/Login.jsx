@@ -12,6 +12,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [status, setStatus] = useState("");
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -25,9 +26,21 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = e.target;
 
+    if (email.value === "" || password.value === "") {
+      setStatus("All fields are required!");
+      return false;
+    }
+
     signInWithEP(email.value, password.value)
       .then((_) => navigate("/dashboard"))
-      .catch((_) => setLoading(false));
+      .catch((err) => {
+        setLoading(false);
+
+        if (err.message === "Firebase: Error (auth/wrong-password).")
+          setStatus("Incorrect password!");
+        else if (err.message === "Firebase: Error (auth/user-not-found).")
+          setStatus("User not found!");
+      });
   };
 
   const handleLoginWithGoogle = (_) => {
@@ -44,6 +57,11 @@ const Login = () => {
             <img src={bnLogin} alt="" />
           </div>
           <form className="form-control space-y-4" onSubmit={handleLoginWithEP}>
+            {status ? (
+              <span className="text-xs font-medium text-[#35bef0]">
+                {status}
+              </span>
+            ) : null}
             <input
               type="email"
               placeholder="Email"

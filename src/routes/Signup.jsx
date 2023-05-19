@@ -13,7 +13,7 @@ const Signup = () => {
     purl: "",
   });
   const navigate = useNavigate();
-  const [success, setSuccess] = useState("");
+  const [status, setStatus] = useState("");
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -27,13 +27,32 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password, purl } = e.target;
 
+    if (
+      name.value === "" ||
+      email.value === "" ||
+      password.value === "" ||
+      purl.value === ""
+    ) {
+      setStatus("All fields are required!");
+      return false;
+    }
+
     createUserWithEP(name.value, email.value, password.value, purl.value)
       .then((_) =>
-        setSuccess(
+        setStatus(
           "Your account has been created successfully! You are being redirected, please wait..."
         )
       )
-      .then((_) => setTimeout((_) => navigate("/dashboard"), 3000));
+      .then((_) => setTimeout((_) => navigate("/dashboard"), 3000))
+      .catch((err) => {
+        if (
+          err.message ===
+          "Firebase: Password should be at least 6 characters (auth/weak-password)."
+        )
+          setStatus("Password should be at least 6 characters!");
+        else if (err.message === "Firebase: Error (auth/email-already-in-use).")
+          setStatus("Email already in use!");
+      });
   };
 
   return (
@@ -54,9 +73,9 @@ const Signup = () => {
             className="form-control basis-80 space-y-4"
             onSubmit={handleSignup}
           >
-            {success ? (
+            {status ? (
               <span className="text-xs font-medium text-neutral md:text-[#35bef0]">
-                {success}
+                {status}
               </span>
             ) : null}
             <label className="input-group">
