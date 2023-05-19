@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 import { FaBars, FaTimesCircle, FaUser } from "react-icons/fa";
+import "react-tooltip/dist/react-tooltip.css";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Nav = () => {
@@ -125,7 +127,12 @@ const Nav = () => {
             </div>
             {!loading && userInfo ? (
               <div className="dropdown dropdown-end ml-3">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <label
+                  tabIndex={0}
+                  className="btn btn-ghost btn-circle avatar"
+                  data-tooltip-id="user-name"
+                  data-tooltip-content={userInfo.displayName}
+                >
                   <div className="w-10 border-2 border-dotted rounded-full">
                     {userInfo.photoURL ? (
                       <img src={userInfo.photoURL} alt="" />
@@ -168,6 +175,7 @@ const Nav = () => {
             ) : null}
           </div>
         </div>
+        <Tooltip id="user-name" />
       </div>
     </nav>
   );
