@@ -6,13 +6,16 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import Nav from "../components/Nav.jsx";
+import Spinner from "../components/Spinner.jsx";
 import Footer from "../components/Footer.jsx";
 
 const Root = () => {
   return (
     <>
       <Nav />
-      <Outlet />
+      <Spinner>
+        <Outlet />
+      </Spinner>
       <Footer />
       <ToastContainer />
     </>
