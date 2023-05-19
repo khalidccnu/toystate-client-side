@@ -36,6 +36,11 @@ const CartCalc = ({ setCartAction, cart }) => {
     });
   };
 
+  const handleOrder = (_) => {
+    clearCart();
+    navigate("/order-complete");
+  };
+
   useEffect(
     (_) => {
       const calc = shoppingCartCalc(cart);
@@ -72,7 +77,7 @@ const CartCalc = ({ setCartAction, cart }) => {
           <button
             type="button"
             className="btn btn-sm bg-[#35bef0] border-none rounded-2xl normal-case w-full"
-            onClick={(_) => navigate("/order-complete")}
+            onClick={handleOrder}
           >
             Order Complete
           </button>

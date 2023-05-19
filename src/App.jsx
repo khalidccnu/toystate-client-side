@@ -9,6 +9,7 @@ import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
 import Cart from "./routes/Cart.jsx";
+import OrderComplete from "./routes/OrderComplete.jsx";
 import Login from "./routes/Login.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
 import Signup from "./routes/Signup.jsx";
@@ -33,6 +34,10 @@ const App = () => {
           path: "/cart",
           element: <Cart />,
           loader: CartLoader,
+        },
+        {
+          path: "/order-complete",
+          element: <OrderComplete />,
         },
         {
           path: "/login",
