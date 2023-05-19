@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLink, FaUser, FaUserSecret } from "react-icons/fa";
+import useTitle from "../hooks/useTitle.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 import ptSignup from "../assets/pt-signup.png";
 
 const Signup = () => {
+  useTitle("Create Your Account");
   const { createUserWithEP } = useContext(AuthContext);
   const [input, setInput] = useState({
     name: "",

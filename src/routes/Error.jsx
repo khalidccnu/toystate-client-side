@@ -2,9 +2,11 @@ import React from "react";
 import { useNavigate, useRouteError } from "react-router-dom";
 import Lottie from "lottie-react";
 import { FaAngleLeft } from "react-icons/fa";
+import useTitle from "../hooks/useTitle.js";
 import anmPageNotFound from "../assets/page-not-found.json";
 
 const Error = () => {
+  useTitle("Page Not Found");
   const { status, statusText } = useRouteError();
   const navigate = useNavigate();
 

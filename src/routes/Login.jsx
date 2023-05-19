@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
+import useTitle from "../hooks/useTitle.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 import bnLogin from "../assets/bn-login.png";
 
 const Login = () => {
+  useTitle("Login Your Account");
   const { loading, setLoading, signInWithEP, signInWithGoogle } =
     useContext(AuthContext);
   const navigate = useNavigate();
