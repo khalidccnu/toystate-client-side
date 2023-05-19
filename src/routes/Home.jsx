@@ -5,6 +5,7 @@ import HomeBanner from "../components/HomeBanner.jsx";
 import CategoryToys from "../components/CategoryToys.jsx";
 import WhatToyStateOffers from "../components/WhatToyStateOffers.jsx";
 import DiscountToys from "../components/DiscountToys.jsx";
+import Gallery from "../components/Gallery.jsx";
 
 const Home = () => {
   useTitle("Home");
@@ -16,6 +17,7 @@ const Home = () => {
       <CategoryToys categories={categories} />
       <WhatToyStateOffers />
       <DiscountToys discount={discount} />
+      <Gallery />
     </>
   );
 };
