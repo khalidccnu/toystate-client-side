@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLoader from "./loaders/HomeLoader.js";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import Root from "./routes/Root.jsx";
+import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
 import Login from "./routes/Login.jsx";
 import Signup from "./routes/Signup.jsx";
@@ -16,6 +17,7 @@ const App = () => {
           <Root />
         </AuthProvider>
       ),
+      errorElement: <Error />,
       children: [
         {
           path: "/",
