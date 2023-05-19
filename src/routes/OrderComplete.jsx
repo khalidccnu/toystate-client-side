@@ -1,10 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useTitle from "../hooks/useTitle.js";
 import imgClock from "../assets/clock.png";
 import imgChecklist from "../assets/checklist.png";
 import imgComplete from "../assets/complete.png";
 
 const OrderComplete = () => {
+  useTitle("Order Is Completed");
   const navigate = useNavigate();
 
   return (

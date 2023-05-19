@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle.js";
 import { addCart, getCart } from "../utils/index.js";
 import RelatedToys from "../components/RelatedToys.jsx";
 
 const ViewToy = () => {
   const toy = useLoaderData();
-  const [isCart, setCart] = useState(false);
   const { _id: id, category_id, name, price, seller, img, discount } = toy;
+  useTitle(name);
+  const [isCart, setCart] = useState(false);
   const [category, setCategory] = useState("");
   const [discountPrice, setDiscountPrice] = useState(null);
 

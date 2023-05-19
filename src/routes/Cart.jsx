@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../hooks/useTitle.js";
 import CartToy from "../components/CartToy.jsx";
 import CartCalc from "../components/CartCalc.jsx";
 
 const Cart = () => {
+  useTitle("Cart");
   const cartLoader = useLoaderData();
   const [cart, setCart] = useState(cartLoader);
   const [cartAction, setCartAction] = useState("");
