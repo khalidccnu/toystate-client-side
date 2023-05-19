@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import useTitle from "../hooks/useTitle.js";
 import { addCart, getCart } from "../utils/index.js";
 import RelatedToys from "../components/RelatedToys.jsx";
 
 const ViewToy = () => {
   const toy = useLoaderData();
-  const { _id: id, category_id, name, price, seller, img, discount } = toy;
+  const {
+    _id: id,
+    category_id,
+    name,
+    price,
+    shipping,
+    quantity,
+    discount,
+    rating,
+    description,
+    img,
+    seller_name,
+    seller_email,
+  } = toy;
   useTitle(name);
   const [isCart, setCart] = useState(false);
   const [category, setCategory] = useState("");
@@ -46,8 +60,22 @@ const ViewToy = () => {
                 </span>
               ) : null}
             </figure>
-            <div className="card-body">
+            <div className="card-body basis-96">
               <h2 className="card-title">{name}</h2>
+              <small className="inline-flex -mt-3 mb-3 text-[0.6rem] text-yellow-400">
+                {Array(5)
+                  .fill(0)
+                  .map((_, idx) => {
+                    return idx < Math.trunc(rating) ? (
+                      <FaStar key={idx} />
+                    ) : !Number.isInteger(rating) &&
+                      idx === Math.trunc(rating) ? (
+                      <FaStarHalfAlt key={idx} />
+                    ) : (
+                      <FaRegStar key={idx} />
+                    );
+                  })}
+              </small>
               <span className="font-semibold">
                 <span>Price: $</span>
                 <span>
@@ -63,8 +91,18 @@ const ViewToy = () => {
                   )}
                 </span>
               </span>
+              <div className="flex space-x-2">
+                <span className="font-semibold">Shipping: ${shipping}</span>
+                <span className="w-0.5 bg-gray-500"></span>
+                <span className="font-semibold">Available: {quantity}</span>
+              </div>
               <span className="font-semibold">Category: {category}</span>
-              <span className="font-semibold">Seller: {seller}</span>
+              <div className="flex space-x-2">
+                <span className="font-semibold">Seller: {seller_name}</span>
+                <span className="w-0.5 bg-gray-500"></span>
+                <span className="font-semibold">Email: {seller_email}</span>
+              </div>
+              <span className="font-semibold text-gray-500">{description}</span>
               <div className="card-actions items-center mt-5">
                 {isCart ? (
                   <button

@@ -34,7 +34,11 @@ const App = () => {
         },
         {
           path: "/all-toys/view-toy/:id",
-          element: <ViewToy />,
+          element: (
+            <PrivateRoute>
+              <ViewToy />
+            </PrivateRoute>
+          ),
           loader: ({ params }) => ViewToyLoader(params.id),
         },
         {
