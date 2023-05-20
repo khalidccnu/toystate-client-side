@@ -159,6 +159,16 @@ const Nav = () => {
                   </li>
                   <li>
                     <NavLink
+                      to="/add-toy"
+                      className={({ isActive }) =>
+                        isActive ? "text-pink-600" : ""
+                      }
+                    >
+                      Add Toy
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
                       to="/my-toys"
                       className={({ isActive }) =>
                         isActive ? "text-pink-600" : ""

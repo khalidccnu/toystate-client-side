@@ -15,6 +15,7 @@ import Cart from "./routes/Cart.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
 import Login from "./routes/Login.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
+import AddToy from "./routes/AddToy.jsx";
 import MyToys from "./routes/MyToys.jsx";
 import Signup from "./routes/Signup.jsx";
 
@@ -69,6 +70,14 @@ const App = () => {
           element: (
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/add-toy",
+          element: (
+            <PrivateRoute>
+              <AddToy />
             </PrivateRoute>
           ),
         },
