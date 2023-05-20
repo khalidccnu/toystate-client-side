@@ -17,6 +17,7 @@ import Login from "./routes/Login.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
 import AddToy from "./routes/AddToy.jsx";
 import MyToys from "./routes/MyToys.jsx";
+import UpdateToy from "./routes/UpdateToy.jsx";
 import Signup from "./routes/Signup.jsx";
 
 const App = () => {
@@ -88,6 +89,15 @@ const App = () => {
               <MyToys />
             </PrivateRoute>
           ),
+        },
+        {
+          path: "/all-toys/update-toy/:id",
+          element: (
+            <PrivateRoute>
+              <UpdateToy />
+            </PrivateRoute>
+          ),
+          loader: ({ params }) => ViewToyLoader(params.id),
         },
       ],
     },
