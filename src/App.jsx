@@ -15,6 +15,7 @@ import Cart from "./routes/Cart.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
 import Login from "./routes/Login.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
+import MyToys from "./routes/MyToys.jsx";
 import Signup from "./routes/Signup.jsx";
 
 const App = () => {
@@ -68,6 +69,14 @@ const App = () => {
           element: (
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/my-toys",
+          element: (
+            <PrivateRoute>
+              <MyToys />
             </PrivateRoute>
           ),
         },
