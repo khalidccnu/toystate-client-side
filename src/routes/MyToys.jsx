@@ -13,6 +13,7 @@ const MyToys = () => {
   const [displayToy, setDisplayToy] = useState("");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [sort, setSort] = useState("asc");
+  const [action, setAction] = useState(false);
 
   useEffect(
     (_) => {
@@ -41,7 +42,7 @@ const MyToys = () => {
         setLoading(false);
       })();
     },
-    [searchKeyword, displayToy, sort]
+    [searchKeyword, displayToy, sort, action]
   );
 
   return isLoading ? (
@@ -102,7 +103,13 @@ const MyToys = () => {
                 </thead>
                 <tbody>
                   {toys.map((toy, idx) => (
-                    <MyToy key={toy["_id"]} idx={idx} toy={toy} />
+                    <MyToy
+                      key={toy["_id"]}
+                      action={action}
+                      setAction={setAction}
+                      idx={idx}
+                      toy={toy}
+                    />
                   ))}
                 </tbody>
               </table>
