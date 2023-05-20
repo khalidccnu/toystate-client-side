@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
+import AllToys from "./routes/AllToys.jsx";
 import ViewToy from "./routes/ViewToy.jsx";
 import Cart from "./routes/Cart.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
@@ -31,6 +32,10 @@ const App = () => {
           path: "/",
           element: <Home />,
           loader: HomeLoader,
+        },
+        {
+          path: "/all-toys",
+          element: <AllToys />,
         },
         {
           path: "/all-toys/view-toy/:id",
