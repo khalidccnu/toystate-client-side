@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { FaSortNumericDown, FaSortNumericUp } from "react-icons/fa";
+import useTitle from "../hooks/useTitle.js";
 import AllToy from "../components/AllToy.jsx";
 
 const AllToys = () => {
+  useTitle("All Toys");
   const [isLoading, setLoading] = useState(true);
   const [toys, setToys] = useState([]);
   const [displayToy, setDisplayToy] = useState("");

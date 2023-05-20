@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BsFillCartDashFill, BsFillCartPlusFill } from "react-icons/bs";
 import { FaArrowCircleRight } from "react-icons/fa";
 import { addCart, getCart, removeCart } from "../utils/index.js";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const AllToy = ({ idx, toy }) => {
+  const { userInfo } = useContext(AuthContext);
   const {
     _id: id,
     name,
@@ -13,6 +15,7 @@ const AllToy = ({ idx, toy }) => {
     quantity,
     category_name: category,
     seller_name: seller,
+    seller_id,
   } = toy;
   const [isCart, setCart] = useState(false);
   const navigate = useNavigate();
@@ -43,21 +46,23 @@ const AllToy = ({ idx, toy }) => {
       <td>{seller}</td>
       <td>
         <span className="inline-flex gap-x-1">
-          {isCart ? (
-            <span
-              className="hover:text-pink-600 cursor-pointer"
-              onClick={(_) => handleRemoveCart(id, name)}
-            >
-              <BsFillCartDashFill />
-            </span>
-          ) : (
-            <span
-              className="hover:text-pink-600 cursor-pointer"
-              onClick={(_) => handleAddCart(id, name)}
-            >
-              <BsFillCartPlusFill />
-            </span>
-          )}
+          {userInfo?.uid !== seller_id ? (
+            isCart ? (
+              <span
+                className="hover:text-pink-600 cursor-pointer"
+                onClick={(_) => handleRemoveCart(id, name)}
+              >
+                <BsFillCartDashFill />
+              </span>
+            ) : (
+              <span
+                className="hover:text-pink-600 cursor-pointer"
+                onClick={(_) => handleAddCart(id, name)}
+              >
+                <BsFillCartPlusFill />
+              </span>
+            )
+          ) : null}
           <FaArrowCircleRight
             className="hover:text-pink-600 cursor-pointer"
             onClick={(_) => navigate("/all-toys/view-toy/" + id)}

@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import useTitle from "../hooks/useTitle.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const AddToy = () => {
+  useTitle("Add Your Toy");
   const { userInfo } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [input, setInput] = useState({

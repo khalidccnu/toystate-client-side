@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Rings } from "react-loader-spinner";
 import { FaSortNumericDown, FaSortNumericUp } from "react-icons/fa";
+import useTitle from "../hooks/useTitle.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 import MyToy from "../components/MyToy.jsx";
 
 const MyToys = () => {
+  useTitle("My  Toys");
   const [isLoading, setLoading] = useState(true);
   const { userInfo } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
