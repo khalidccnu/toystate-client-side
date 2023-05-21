@@ -26,14 +26,15 @@ const UpdateToy = () => {
     price: price,
     shipping: shipping,
     quantity: quantity,
+    discount: discount,
     iurl: img,
+    category: category_id,
   });
-  const [inputCheckBox, setInputCheckBox] = useState(discount);
-  const [inputSelect, setInputSelect] = useState("");
   const [status, setStatus] = useState("");
 
   const changeInput = ({ target }) => {
-    const { name, value } = target;
+    const name = target.name;
+    const value = target.type === "checkbox" ? target.checked : target.value;
 
     setInput((prev) => {
       return { ...prev, [name]: value };
@@ -82,13 +83,11 @@ const UpdateToy = () => {
         price: price.value,
         shipping: shipping.value,
         quantity: quantity.value,
-        discount: discount.value,
+        discount: discount.checked,
         rating: 0,
         description: description.value,
         img: iurl.value,
         seller_name: userInfo.displayName,
-        seller_email: userInfo.email,
-        seller_id: userInfo.uid,
         category_id: category.value,
       }),
     })
@@ -160,10 +159,9 @@ const UpdateToy = () => {
               <input
                 type="checkbox"
                 name="discount"
-                value={inputCheckBox}
                 className="checkbox checkbox-sm"
-                onChange={(_) => setInputCheckBox(!inputCheckBox)}
-                checked={inputCheckBox ? "checked" : null}
+                onChange={changeInput}
+                checked={input.discount}
               />
             </label>
             <input
@@ -175,13 +173,18 @@ const UpdateToy = () => {
               onChange={changeInput}
             />
             <select
-              className="select select-sm select-bordered focus:outline-0"
               name="category"
-              value={inputSelect}
-              onChange={(e) => setInputSelect(e.target.value)}
+              className="select select-sm select-bordered focus:outline-0"
+              onChange={changeInput}
             >
               {categories.map((category) => (
-                <option key={category["_id"]} value={category["_id"]}>
+                <option
+                  key={category["_id"]}
+                  value={category["_id"]}
+                  selected={
+                    input.category === category["_id"] ? "selected" : null
+                  }
+                >
                   {category.name}
                 </option>
               ))}

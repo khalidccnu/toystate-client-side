@@ -11,7 +11,7 @@ const WhatToyStateOffers = () => {
   }, []);
 
   return (
-    <section className="pb-10 text-center">
+    <section className="overflow-x-hidden pb-10 text-center">
       <div className="container">
         <h3 className="font-bold text-2xl mb-10">What ToyState Offers!</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-4xl mx-auto">

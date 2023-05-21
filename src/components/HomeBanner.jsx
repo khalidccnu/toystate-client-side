@@ -11,7 +11,7 @@ const HomeBanner = () => {
       <img
         src={imgPattern}
         alt=""
-        className="absolute top-0 left-0 w-full h-full opacity-5 -scale-x-100"
+        className="hidden sm:inline absolute top-0 left-0 w-full h-full opacity-5 -scale-x-100"
       />
       <div className="container relative">
         <div className="flex flex-col-reverse sm:flex-row justify-between items-center max-w-4xl mx-auto py-8 sm:py-24">

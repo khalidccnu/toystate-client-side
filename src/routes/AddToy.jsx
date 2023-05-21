@@ -12,14 +12,15 @@ const AddToy = () => {
     price: "",
     shipping: "",
     quantity: "",
+    discount: false,
     iurl: "",
+    category: "not set yet",
   });
-  const [inputCheckBox, setInputCheckBox] = useState(false);
-  const [inputSelect, setInputSelect] = useState("");
   const [status, setStatus] = useState("");
 
   const changeInput = ({ target }) => {
-    const { name, value } = target;
+    const name = target.name;
+    const value = target.type === "checkbox" ? target.checked : target.value;
 
     setInput((prev) => {
       return { ...prev, [name]: value };
@@ -45,7 +46,8 @@ const AddToy = () => {
       price.value === "" ||
       shipping.value === "" ||
       quantity.value === "" ||
-      iurl.value === ""
+      iurl.value === "" ||
+      category.value === "not set yet"
     ) {
       setStatus("All fields are required!");
       return false;
@@ -68,7 +70,7 @@ const AddToy = () => {
         price: price.value,
         shipping: shipping.value,
         quantity: quantity.value,
-        discount: discount.value,
+        discount: discount.checked,
         rating: 0,
         description: description.value,
         img: iurl.value,
@@ -86,10 +88,10 @@ const AddToy = () => {
           price: "",
           shipping: "",
           quantity: "",
+          discount: false,
           iurl: "",
+          category: "not set yet",
         });
-        setInputCheckBox(false);
-        setInputSelect("");
       })
       .catch((_) => setStatus("Something went wrong!"));
   };
@@ -157,9 +159,9 @@ const AddToy = () => {
             <input
               type="checkbox"
               name="discount"
-              value={inputCheckBox}
               className="checkbox checkbox-sm"
-              onChange={(_) => setInputCheckBox(!inputCheckBox)}
+              onChange={changeInput}
+              checked={input.discount}
             />
           </label>
           <input
@@ -171,11 +173,17 @@ const AddToy = () => {
             onChange={changeInput}
           />
           <select
-            className="select select-sm select-bordered focus:outline-0"
             name="category"
-            value={inputSelect}
-            onChange={(e) => setInputSelect(e.target.value)}
+            className="select select-sm select-bordered focus:outline-0"
+            onChange={changeInput}
           >
+            <option
+              value="not set yet"
+              selected={input.category === "not set yet" ? "selected" : null}
+              disabled
+            >
+              Category
+            </option>
             {categories.map((category) => (
               <option key={category["_id"]} value={category["_id"]}>
                 {category.name}

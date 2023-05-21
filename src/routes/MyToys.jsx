@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Rings } from "react-loader-spinner";
+import { toast } from "react-toastify";
 import { FaSortNumericDown, FaSortNumericUp } from "react-icons/fa";
 import useTitle from "../hooks/useTitle.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
@@ -18,6 +19,11 @@ const MyToys = () => {
   useEffect(
     (_) => {
       (async (_) => {
+        if (!/^[a-zA-Z]+$/.test(searchKeyword) && searchKeyword !== "") {
+          toast.warn("Only letter supported!");
+          return false;
+        }
+
         const toysArr = [];
 
         const toysData = await fetch(
