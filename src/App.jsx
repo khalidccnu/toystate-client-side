@@ -1,6 +1,5 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomeLoader from "./loaders/HomeLoader.js";
 import ViewToyLoader from "./loaders/ViewToyLoader.js";
 import CartLoader from "./loaders/CartLoader.js";
 import AuthProvider from "./providers/AuthProvider.jsx";
@@ -34,7 +33,6 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
-          loader: HomeLoader,
         },
         {
           path: "/all-toys",

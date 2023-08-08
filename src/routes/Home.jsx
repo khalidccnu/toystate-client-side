@@ -1,5 +1,4 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 import useTitle from "../hooks/useTitle.js";
 import HomeBanner from "../components/HomeBanner.jsx";
 import CategoryToys from "../components/CategoryToys.jsx";
@@ -9,14 +8,13 @@ import Gallery from "../components/Gallery.jsx";
 
 const Home = () => {
   useTitle("Home");
-  const [categories, discount] = useLoaderData();
 
   return (
     <>
       <HomeBanner />
-      <CategoryToys categories={categories} />
+      <CategoryToys />
       <WhatToyStateOffers />
-      <DiscountToys discount={discount} />
+      <DiscountToys />
       <Gallery />
     </>
   );

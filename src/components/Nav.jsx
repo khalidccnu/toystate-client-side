@@ -99,17 +99,6 @@ const Nav = () => {
                     Cart
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/blogs"
-                    className={({ isActive }) =>
-                      "nav-link block hover:text-purple-600" +
-                      (isActive ? " text-pink-600" : "")
-                    }
-                  >
-                    Blogs
-                  </NavLink>
-                </li>
                 {!loading && !userInfo ? (
                   <li>
                     <NavLink
